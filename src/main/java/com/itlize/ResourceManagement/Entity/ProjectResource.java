@@ -22,4 +22,32 @@ public class ProjectResource {
     @ManyToOne
     @JoinColumn(name = "resourceId")
     private int resourceId;
+
+    public int getRecordID() {
+        return recordID;
+    }
+
+    public void setRecordID(int recordID) {
+        this.recordID = recordID;
+    }
+
+    public int getProjectID() {
+        return projectID;
+    }
+
+    public void setProjectID(int projectID) {
+        this.projectID = projectID;
+    }
+
+    public int getResourceId() {
+        return resourceId;
+    }
+
+    public void setResourceId(int resourceId) {
+        this.resourceId = resourceId;
+    }
+
+    public LocalDateTime getTimeCreated() {
+        return timeCreated;
+    }
 }

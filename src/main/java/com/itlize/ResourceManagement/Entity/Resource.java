@@ -28,4 +28,36 @@ public class Resource {
     @ManyToOne
     @JoinColumn(name = "resourceID")
     private Set<ResourceDetail> resourceDetailSet;
+
+    public int getResourceId() {
+        return resourceId;
+    }
+
+    public void setResourceId(int resourceId) {
+        this.resourceId = resourceId;
+    }
+
+    public String getResourceName() {
+        return resourceName;
+    }
+
+    public void setResourceName(String resourceName) {
+        this.resourceName = resourceName;
+    }
+
+    public LocalDateTime getTimeCreated() {
+        return timeCreated;
+    }
+
+    public LocalDateTime getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public Set<ProjectResource> getProjectResourceSet() {
+        return projectResourceSet;
+    }
+
+    public Set<ResourceDetail> getResourceDetailSet() {
+        return resourceDetailSet;
+    }
 }
