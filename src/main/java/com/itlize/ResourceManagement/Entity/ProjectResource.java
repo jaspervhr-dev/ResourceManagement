@@ -2,12 +2,13 @@ package com.itlize.ResourceManagement.Entity;
 
 import jdk.jfr.Timestamp;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
-@Entity
 public class ProjectResource {
-
     @Id
     @GeneratedValue
     private int recordID;
@@ -22,4 +23,5 @@ public class ProjectResource {
     @ManyToOne
     @JoinColumn(name = "resourceId")
     private int resourceId;
+
 }
