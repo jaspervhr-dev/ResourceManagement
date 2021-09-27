@@ -21,12 +21,10 @@ public class Resource {
     @Timestamp
     private LocalDateTime lastUpdated;
 
-    @OneToMany
-    @JoinColumn(name = "resourceID")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<ProjectResource> projectResourceSet;
 
-    @ManyToOne
-    @JoinColumn(name = "resourceID")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource", cascade = CascadeType.ALL)
     private Set<ResourceDetail> resourceDetailSet;
 
     public int getResourceId() {

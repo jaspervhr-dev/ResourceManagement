@@ -18,11 +18,11 @@ public class Project {
     @Timestamp
     private LocalDateTime timeCreated;
 
-    @ManyToOne
-    @JoinColumn(name = "username")
+    @ManyToOne(targetEntity = User.class,cascade = CascadeType.MERGE)
+    @JoinColumn(name = "user_name")
     private String owner;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "project",cascade = CascadeType.ALL)
     @JoinColumn(name = "projectID")
     private Set<ProjectResource> projectResourceSet;
 

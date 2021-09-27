@@ -3,6 +3,7 @@ package com.itlize.ResourceManagement.Entity;
 import jdk.jfr.Timestamp;
 
 import javax.persistence.*;
+import java.lang.annotation.Target;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,11 +16,11 @@ public class ProjectResource {
     @Timestamp
     private LocalDateTime timeCreated;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Project.class,cascade = CascadeType.MERGE)
     @JoinColumn(name = "projectID")
-    private int projectID;
+    private Integer projectID;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Resource.class,cascade = CascadeType.MERGE)
     @JoinColumn(name = "resourceId")
-    private int resourceId;
+    private Integer resourceId;
 }

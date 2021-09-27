@@ -2,10 +2,7 @@ package com.itlize.ResourceManagement.Entity;
 
 import jdk.jfr.Timestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -31,7 +28,7 @@ public class User {
     @Timestamp
     private LocalDateTime lastUpdated;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "user",cascade = CascadeType.ALL)
     @JoinColumn(name = "owner")
     private Set<Project> projectSet;
 

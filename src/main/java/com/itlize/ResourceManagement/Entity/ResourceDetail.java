@@ -3,6 +3,7 @@ package com.itlize.ResourceManagement.Entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 public class ResourceDetail {
@@ -14,18 +15,19 @@ public class ResourceDetail {
 
     private String column_value;
 
-    @ManyToOne()
-    private Integer column_id;
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "resource_detail",cascade = CascadeType.ALL)
+    private Set<ProjectColumn> columnSet;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Resource.class,cascade = CascadeType.MERGE)
+    @JoinColumn(name = "resource_id")
     private Integer resource_id;
 
     public Integer getId() {
         return id;
     }
 
-    public Integer getColumn_id() {
-        return column_id;
+    public Set<ProjectColumn> getColumnSet() {
+        return columnSet;
     }
 
     public Integer getResource_id() {
@@ -40,8 +42,8 @@ public class ResourceDetail {
         return time_created;
     }
 
-    public void setColumn_id(Integer column_id) {
-        this.column_id = column_id;
+    public void setColumnSet(Set<ProjectColumn> columnSet) {
+        this.columnSet = columnSet;
     }
 
     public void setColumn_value(String column_value) {

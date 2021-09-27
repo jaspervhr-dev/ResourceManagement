@@ -1,15 +1,16 @@
 package com.itlize.ResourceManagement.Entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.Set;
 
+@Entity
 public class ProjectColumn {
     @Id
     @GeneratedValue
     private Integer column_id;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Project.class,cascade = CascadeType.MERGE)
+    @JoinColumn(name = "project_id")
     private Integer project_id;
 
     private String column_name;
@@ -17,6 +18,9 @@ public class ProjectColumn {
     private Type type;
 
     private String formula_text;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "project_column",cascade = CascadeType.ALL)
+    private Set<ResourceDetail> resourceDetailSet;
 
     public void setColumn_id(Integer column_id) {
         this.column_id = column_id;
