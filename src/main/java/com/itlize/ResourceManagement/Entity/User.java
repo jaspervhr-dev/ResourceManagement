@@ -4,12 +4,16 @@ import jdk.jfr.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 public class User {
 
     @Id
-    private String user_name;
+    private String username;
 
     private String password;
 
@@ -18,8 +22,11 @@ public class User {
     private String role;
 
     @Timestamp
-    private int time_created;
+    private LocalDateTime timeCreated;
 
     @Timestamp
-    private int last_updated;
+    private LocalDateTime lastUpdated;
+
+    @OneToMany
+    private Set<Project> projectSet;
 }
