@@ -4,6 +4,7 @@ import jdk.jfr.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,5 +33,6 @@ public class User {
     private LocalDateTime lastUpdated;
 
     @OneToMany
+    @JoinColumn(name = "owner")
     private Set<Project> projectSet;
 }

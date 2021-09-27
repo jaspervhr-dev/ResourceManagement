@@ -2,10 +2,7 @@ package com.itlize.ResourceManagement.Entity;
 
 import jdk.jfr.Timestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -24,9 +21,11 @@ public class Resource {
     @Timestamp
     private LocalDateTime lastUpdated;
 
-    @ManyToOne
+    @OneToMany
+    @JoinColumn(name = "resourceID")
     private Set<ProjectResource> projectResourceSet;
 
     @ManyToOne
+    @JoinColumn(name = "resourceID")
     private Set<ResourceDetail> resourceDetailSet;
 }
