@@ -12,6 +12,8 @@ public class Project {
     @GeneratedValue
     private int projectId;
 
+    private String projectName;
+
     @Timestamp
     private LocalDateTime timeCreated;
 

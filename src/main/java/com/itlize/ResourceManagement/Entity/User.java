@@ -21,6 +21,10 @@ public class User {
 
     private String role;
 
+    private String email;
+
+    private String phoneNumber;
+
     @Timestamp
     private LocalDateTime timeCreated;
 
