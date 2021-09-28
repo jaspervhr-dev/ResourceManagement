@@ -7,6 +7,7 @@ import java.lang.annotation.Target;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "project_resources")
 public class ProjectResource {
 
     @Id
@@ -14,13 +15,15 @@ public class ProjectResource {
     private int recordID;
 
     @Timestamp
+    @Column(name = "time_created")
     private LocalDateTime timeCreated;
 
     @ManyToOne(targetEntity = Project.class,cascade = CascadeType.MERGE)
-    @JoinColumn(name = "projectID")
+    @JoinColumn(name = "project_id")
     private Integer projectID;
 
     @ManyToOne(targetEntity = Resource.class,cascade = CascadeType.MERGE)
-    @JoinColumn(name = "resourceId")
+    @Column(name = "resource_id")
+    @JoinColumn(name = "resource_id")
     private Integer resourceId;
 }
