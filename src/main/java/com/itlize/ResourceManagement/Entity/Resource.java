@@ -11,7 +11,7 @@ public class Resource {
 
     @Id
     @GeneratedValue
-    private int resourceId;
+    private int resource_id;
 
     private String resourceName;
 
@@ -28,11 +28,11 @@ public class Resource {
     private Set<ResourceDetail> resourceDetailSet;
 
     public int getResourceId() {
-        return resourceId;
+        return resource_id;
     }
 
     public void setResourceId(int resourceId) {
-        this.resourceId = resourceId;
+        this.resource_id = resourceId;
     }
 
     public String getResourceName() {

@@ -11,7 +11,7 @@ public class Project {
 
     @Id
     @GeneratedValue
-    private int projectId;
+    private int project_id;
 
     private String projectName;
 
@@ -23,15 +23,14 @@ public class Project {
     private String owner;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "project",cascade = CascadeType.ALL)
-    @JoinColumn(name = "projectID")
     private Set<ProjectResource> projectResourceSet;
 
     public int getProjectId() {
-        return projectId;
+        return project_id;
     }
 
     public void setProjectId(int projectId) {
-        this.projectId = projectId;
+        this.project_id = projectId;
     }
 
     public String getProjectName() {
@@ -54,7 +53,11 @@ public class Project {
         return timeCreated;
     }
 
+    public void setTimeCreated(LocalDateTime timeCreated) {this.timeCreated = timeCreated;}
+
     public Set<ProjectResource> getProjectResourceSet() {
         return projectResourceSet;
     }
+
+    public void setProjectResourceSet(Set<ProjectResource> projectResourceSet) {this.projectResourceSet = projectResourceSet;}
 }
