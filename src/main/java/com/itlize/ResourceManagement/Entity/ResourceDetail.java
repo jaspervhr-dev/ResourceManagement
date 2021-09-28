@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
+@Table(name = "resources_details")
 public class ResourceDetail {
     @Id
     @GeneratedValue
@@ -14,7 +15,7 @@ public class ResourceDetail {
 
     private String column_value;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "resource_detail",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "column_id",cascade = CascadeType.ALL)
     private Set<ProjectColumn> columnSet;
 
     @ManyToOne(targetEntity = Resource.class,cascade = CascadeType.MERGE)

@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
+@Table(name = "resources")
 public class Resource {
 
     @Id
@@ -21,10 +22,10 @@ public class Resource {
     @Timestamp
     private LocalDateTime last_updated;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource_id", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<ProjectResource> projectResourceSet;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource_id", cascade = CascadeType.ALL)
     private Set<ResourceDetail> resourceDetailSet;
 
     public int getResourceId() {
