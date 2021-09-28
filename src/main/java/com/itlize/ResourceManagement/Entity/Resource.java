@@ -12,44 +12,48 @@ public class Resource {
 
     @Id
     @GeneratedValue
-    private int resource_id;
+    @Column(name = "resource_id")
+    private int resourceId;
 
-    private String resource_name;
+    @Column(name = "recource_name")
+    private String resourceName;
 
     @Timestamp
-    private LocalDateTime time_created;
+    @Column(name = "time_created")
+    private LocalDateTime timeCreated;
 
     @Timestamp
-    private LocalDateTime last_updated;
+    @Column(name = "last_updated")
+    private LocalDateTime lastUpdated;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource_id", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resourceId", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<ProjectResource> projectResourceSet;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource_id", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resourceId", cascade = CascadeType.ALL)
     private Set<ResourceDetail> resourceDetailSet;
 
     public int getResourceId() {
-        return resource_id;
+        return resourceId;
     }
 
     public void setResourceId(int resourceId) {
-        this.resource_id = resourceId;
+        this.resourceId = resourceId;
     }
 
     public String getResourceName() {
-        return resource_name;
+        return resourceName;
     }
 
     public void setResourceName(String resourceName) {
-        this.resource_name = resourceName;
+        this.resourceName = resourceName;
     }
 
     public LocalDateTime getTimeCreated() {
-        return time_created;
+        return timeCreated;
     }
 
     public LocalDateTime getLastUpdated() {
-        return last_updated;
+        return lastUpdated;
     }
 
     public Set<ProjectResource> getProjectResourceSet() {
