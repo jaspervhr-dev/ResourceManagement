@@ -10,7 +10,7 @@ import java.util.Set;
 public class User {
 
     @Id
-    private String username;
+    private String user_name;
 
     private String password;
 
@@ -20,20 +20,20 @@ public class User {
 
     private String email;
 
-    private String phoneNumber;
+    private String phone_number;
 
     @Timestamp
-    private LocalDateTime timeCreated;
+    private LocalDateTime time_created;
 
     @Timestamp
-    private LocalDateTime lastUpdated;
+    private LocalDateTime last_updated;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "user",cascade = CascadeType.ALL)
     private Set<Project> projectSet;
 
-    public String getUsername() {return username;}
+    public String getUsername() {return user_name;}
 
-    public void setUsername(String username) {this.username = username;}
+    public void setUsername(String username) {this.user_name = username;}
 
     public String getPassword() {return password;}
 
@@ -51,19 +51,19 @@ public class User {
 
     public void setEmail(String email) {this.email = email;}
 
-    public String getPhoneNumber() {return phoneNumber;}
+    public String getPhoneNumber() {return phone_number;}
 
-    public void setPhoneNumber(String phoneNumber) {this.phoneNumber = phoneNumber;}
+    public void setPhoneNumber(String phoneNumber) {this.phone_number = phoneNumber;}
 
-    public LocalDateTime getTimeCreated() {return timeCreated;}
+    public LocalDateTime getTimeCreated() {return time_created;}
 
-    public LocalDateTime getLastUpdated() {return lastUpdated;}
+    public LocalDateTime getLastUpdated() {return last_updated;}
 
     public Set<Project> getProjectSet() {return projectSet;}
 
-    public void setTimeCreated(LocalDateTime timeCreated) {this.timeCreated = timeCreated;}
+    public void setTimeCreated(LocalDateTime timeCreated) {this.time_created = timeCreated;}
 
-    public void setLastUpdated(LocalDateTime lastUpdated) {this.lastUpdated = lastUpdated;}
+    public void setLastUpdated(LocalDateTime lastUpdated) {this.last_updated = lastUpdated;}
 
     public void setProjectSet(Set<Project> projectSet) {this.projectSet = projectSet;}
 }

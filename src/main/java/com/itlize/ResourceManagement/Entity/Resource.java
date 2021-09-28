@@ -13,13 +13,13 @@ public class Resource {
     @GeneratedValue
     private int resource_id;
 
-    private String resourceName;
+    private String resource_name;
 
     @Timestamp
-    private LocalDateTime timeCreated;
+    private LocalDateTime time_created;
 
     @Timestamp
-    private LocalDateTime lastUpdated;
+    private LocalDateTime last_updated;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<ProjectResource> projectResourceSet;
@@ -36,19 +36,19 @@ public class Resource {
     }
 
     public String getResourceName() {
-        return resourceName;
+        return resource_name;
     }
 
     public void setResourceName(String resourceName) {
-        this.resourceName = resourceName;
+        this.resource_name = resourceName;
     }
 
     public LocalDateTime getTimeCreated() {
-        return timeCreated;
+        return time_created;
     }
 
     public LocalDateTime getLastUpdated() {
-        return lastUpdated;
+        return last_updated;
     }
 
     public Set<ProjectResource> getProjectResourceSet() {
