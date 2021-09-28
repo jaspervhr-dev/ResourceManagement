@@ -12,7 +12,7 @@ public class ProjectResource {
 
     @Id
     @GeneratedValue
-    private int recordID;
+    private int recordId;
 
     @Timestamp
     @Column(name = "time_created")
@@ -20,7 +20,7 @@ public class ProjectResource {
 
     @ManyToOne(targetEntity = Project.class,cascade = CascadeType.MERGE)
     @JoinColumn(name = "project_id")
-    private Integer projectID;
+    private Integer projectId;
 
     @ManyToOne(targetEntity = Resource.class,cascade = CascadeType.MERGE)
     @Column(name = "resource_id")

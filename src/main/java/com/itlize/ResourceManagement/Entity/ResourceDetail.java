@@ -9,56 +9,46 @@ import java.util.Set;
 public class ResourceDetail {
     @Id
     @GeneratedValue
-    private Integer id;
+    @Column(name = "record_id")
+    private Integer recordId;
 
-    private LocalDateTime time_created;
+    @Column(name = "time_created")
+    private LocalDateTime timeCreated;
 
-    private String column_value;
+    @Column(name = "column_value")
+    private String columnValue;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "column_id",cascade = CascadeType.ALL)
-    private Set<ProjectColumn> columnSet;
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "column_id")
+    private ProjectColumn columnId;
 
     @ManyToOne(targetEntity = Resource.class,cascade = CascadeType.MERGE)
     @JoinColumn(name = "resource_id")
-    private Integer resource_id;
+    private Integer resourceId;
 
-    public Integer getId() {
-        return id;
-    }
+    public Integer getId() {return recordId;}
 
-    public Set<ProjectColumn> getColumnSet() {
-        return columnSet;
-    }
+    public ProjectColumn getColumnSet() {return columnId;}
 
-    public Integer getResource_id() {
-        return resource_id;
-    }
+    public Integer getResource_id() {return resourceId;}
 
-    public String getColumn_value() {
-        return column_value;
-    }
+    public String getColumn_value() {return columnValue;}
 
-    public LocalDateTime getTime_created() {
-        return time_created;
-    }
+    public LocalDateTime getTime_created() {return timeCreated;}
 
-    public void setColumnSet(Set<ProjectColumn> columnSet) {
-        this.columnSet = columnSet;
-    }
+    public void setColumnSet(ProjectColumn column_id) {this.columnId = column_id;}
 
-    public void setColumn_value(String column_value) {
-        this.column_value = column_value;
-    }
+    public void setColumn_value(String column_value) {this.columnValue = column_value;}
 
     public void setId(Integer id) {
-        this.id = id;
+        this.recordId = id;
     }
 
     public void setResource_id(Integer resource_id) {
-        this.resource_id = resource_id;
+        this.resourceId = resource_id;
     }
 
     public void setTime_created(LocalDateTime time_created) {
-        this.time_created = time_created;
+        this.timeCreated = time_created;
     }
 }

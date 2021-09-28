@@ -11,34 +11,37 @@ public class Project {
 
     @Id
     @GeneratedValue
-    private int project_id;
+    @Column(name = "project_id")
+    private int projectId;
 
-    private String project_name;
+    @Column(name = "project_name")
+    private String projectName;
 
     @Timestamp
-    private LocalDateTime time_created;
+    @Column(name = "time_created")
+    private LocalDateTime timeCreated;
 
     @ManyToOne(targetEntity = User.class,cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_name")
     private String owner;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "project",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "projectId",cascade = CascadeType.ALL)
     private Set<ProjectResource> projectResourceSet;
 
     public int getProjectId() {
-        return project_id;
+        return projectId;
     }
 
     public void setProjectId(int projectId) {
-        this.project_id = projectId;
+        this.projectId = projectId;
     }
 
     public String getProjectName() {
-        return project_name;
+        return projectName;
     }
 
     public void setProjectName(String projectName) {
-        this.project_name = projectName;
+        this.projectName = projectName;
     }
 
     public String getOwner() {
@@ -49,11 +52,9 @@ public class Project {
         this.owner = owner;
     }
 
-    public LocalDateTime getTimeCreated() {
-        return time_created;
-    }
+    public LocalDateTime getTimeCreated() {return timeCreated;}
 
-    public void setTimeCreated(LocalDateTime timeCreated) {this.time_created = timeCreated;}
+    public void setTimeCreated(LocalDateTime timeCreated) {this.timeCreated = timeCreated;}
 
     public Set<ProjectResource> getProjectResourceSet() {
         return projectResourceSet;
