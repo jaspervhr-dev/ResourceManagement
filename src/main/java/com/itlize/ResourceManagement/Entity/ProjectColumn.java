@@ -13,7 +13,6 @@ public class ProjectColumn {
 
     @ManyToOne(targetEntity = Project.class,cascade = CascadeType.MERGE)
     @JoinColumn(name = "project_id")
-    @Column(name = "project_id")
     private Integer projectId;
 
     @Column(name = "column_name")

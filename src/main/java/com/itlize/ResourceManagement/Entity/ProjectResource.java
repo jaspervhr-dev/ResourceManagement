@@ -23,7 +23,6 @@ public class ProjectResource {
     private Integer projectId;
 
     @ManyToOne(targetEntity = Resource.class,cascade = CascadeType.MERGE)
-    @Column(name = "resource_id")
     @JoinColumn(name = "resource_id")
     private Integer resourceId;
 }
