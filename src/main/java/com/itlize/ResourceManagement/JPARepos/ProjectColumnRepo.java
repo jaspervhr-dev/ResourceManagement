@@ -5,6 +5,6 @@ import org.springframework.data.repository.query.QueryByExampleExecutor;
 
 import java.io.Serializable;
 
-public interface ProjectColumnRepo<T, ID extends Serializable>
-        extends PagingAndSortingRepository<T, ID>, QueryByExampleExecutor<T> {
+public interface ProjectColumnRepo<ProjectColumn, ID extends Serializable>
+        extends PagingAndSortingRepository<ProjectColumn, ID>, QueryByExampleExecutor<ProjectColumn> {
 }
