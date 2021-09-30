@@ -7,10 +7,12 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
+@Table(name = "User")
 public class User {
 
     @Id
-    private String user_name;
+    @Column(name = "user_name")
+    private String userName;
 
     private String password;
 
@@ -20,7 +22,7 @@ public class User {
 
     private String email;
 
-    private String phone_number;
+    private String phoneNumber;
 
     @Timestamp
     private LocalDateTime time_created;
@@ -28,12 +30,12 @@ public class User {
     @Timestamp
     private LocalDateTime last_updated;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "owner",cascade = CascadeType.ALL)
     private Set<Project> projectSet;
 
-    public String getUsername() {return user_name;}
+    public String getUsername() {return userName;}
 
-    public void setUsername(String username) {this.user_name = username;}
+    public void setUsername(String username) {this.userName = username;}
 
     public String getPassword() {return password;}
 
@@ -51,9 +53,9 @@ public class User {
 
     public void setEmail(String email) {this.email = email;}
 
-    public String getPhoneNumber() {return phone_number;}
+    public String getPhoneNumber() {return phoneNumber;}
 
-    public void setPhoneNumber(String phoneNumber) {this.phone_number = phoneNumber;}
+    public void setPhoneNumber(String phoneNumber) {this.phoneNumber = phoneNumber;}
 
     public LocalDateTime getTimeCreated() {return time_created;}
 

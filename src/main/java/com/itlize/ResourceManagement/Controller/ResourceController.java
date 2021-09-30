@@ -4,6 +4,7 @@ import com.itlize.ResourceManagement.Entity.Resource;
 import com.itlize.ResourceManagement.Service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +28,7 @@ public class ResourceController {
     }
 
     @GetMapping("/{id}")
-    public Resource findById(Integer id){
+    public Resource findById(@PathVariable Integer id){
         return service.findOneById(id);
     }
 }
