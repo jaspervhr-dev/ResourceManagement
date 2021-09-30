@@ -23,9 +23,9 @@ public class Project {
 
     @ManyToOne(targetEntity = User.class,cascade = CascadeType.MERGE)
     @JoinColumn(name = "owner")
-    private String owner;
+    private User owner;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "projectId",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "project",cascade = CascadeType.ALL)
     private Set<ProjectResource> projectResourceSet;
 
     public int getProjectId() {
@@ -44,11 +44,11 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public String getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(String owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
     }
 

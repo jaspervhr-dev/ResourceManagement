@@ -22,10 +22,10 @@ public class Resource {
     @Timestamp
     private LocalDateTime lastUpdated;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resourceId", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<ProjectResource> projectResourceSet;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resourceId", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource", cascade = CascadeType.ALL)
     private Set<ResourceDetail> resourceDetailSet;
 
     public int getResourceId() {
