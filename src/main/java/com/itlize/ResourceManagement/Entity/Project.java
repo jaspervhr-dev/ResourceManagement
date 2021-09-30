@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
+@Table(name = "project")
 public class Project {
 
     @Id
@@ -22,8 +23,8 @@ public class Project {
     private LocalDateTime timeCreated;
 
     @ManyToOne(targetEntity = User.class,cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_name")
-    private String owner;
+    @JoinColumn(name = "owner")
+    private User owner;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "projectId",cascade = CascadeType.ALL)
     private Set<ProjectResource> projectResourceSet;
@@ -44,15 +45,16 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public String getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(String owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
     }
 
     public LocalDateTime getTimeCreated() {return timeCreated;}
+
 
     public void setTimeCreated(LocalDateTime timeCreated) {this.timeCreated = timeCreated;}
 

@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
+@Table(name = "User")
 public class User {
 
     @Id
@@ -35,9 +36,9 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "owner",cascade = CascadeType.ALL)
     private Set<Project> projectSet;
 
-    public String getUsername() {return username;}
+    public String getUsername() {return userName;}
 
-    public void setUsername(String username) {this.username = username;}
+    public void setUsername(String username) {this.userName = username;}
 
     public String getPassword() {return password;}
 

@@ -14,8 +14,8 @@ public class Resource {
     @GeneratedValue
     @Column(name = "resource_id")
     private int resourceId;
-
-    @Column(name = "recource_name")
+    
+    @Column(name = "resource_name")
     private String resourceName;
 
     @Timestamp
@@ -26,10 +26,11 @@ public class Resource {
     @Column(name = "last_updated")
     private LocalDateTime lastUpdated;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resourceId", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<ProjectResource> projectResourceSet;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resourceId", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource", cascade = CascadeType.ALL)
+
     private Set<ResourceDetail> resourceDetailSet;
 
     public int getResourceId() {
