@@ -8,11 +8,13 @@ import java.util.Set;
 public class ProjectColumn {
     @Id
     @GeneratedValue
+    @Column(name = "column_id")
     private Integer columnId;
 
     @ManyToOne(targetEntity = Project.class,cascade = CascadeType.MERGE)
     @JoinColumn(name = "project_id")
     private Project project;
+
 
     @Column(name = "column_name")
     private String columnName;

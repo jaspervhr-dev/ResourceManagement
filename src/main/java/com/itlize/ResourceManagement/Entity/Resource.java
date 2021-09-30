@@ -12,20 +12,25 @@ public class Resource {
 
     @Id
     @GeneratedValue
+    @Column(name = "resource_id")
     private int resourceId;
-
+    
+    @Column(name = "resource_name")
     private String resourceName;
 
     @Timestamp
+    @Column(name = "time_created")
     private LocalDateTime timeCreated;
 
     @Timestamp
+    @Column(name = "last_updated")
     private LocalDateTime lastUpdated;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<ProjectResource> projectResourceSet;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource", cascade = CascadeType.ALL)
+
     private Set<ResourceDetail> resourceDetailSet;
 
     public int getResourceId() {

@@ -19,13 +19,14 @@ public class Project {
     private String projectName;
 
     @Timestamp
+    @Column(name = "time_created")
     private LocalDateTime timeCreated;
 
     @ManyToOne(targetEntity = User.class,cascade = CascadeType.MERGE)
     @JoinColumn(name = "owner")
     private User owner;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "project",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "projectId",cascade = CascadeType.ALL)
     private Set<ProjectResource> projectResourceSet;
 
     public int getProjectId() {
@@ -52,9 +53,8 @@ public class Project {
         this.owner = owner;
     }
 
-    public LocalDateTime getTimeCreated() {
-        return timeCreated;
-    }
+    public LocalDateTime getTimeCreated() {return timeCreated;}
+
 
     public void setTimeCreated(LocalDateTime timeCreated) {this.timeCreated = timeCreated;}
 

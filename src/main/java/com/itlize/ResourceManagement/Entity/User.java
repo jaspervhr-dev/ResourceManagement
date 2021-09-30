@@ -12,7 +12,7 @@ public class User {
 
     @Id
     @Column(name = "user_name")
-    private String userName;
+    private String username;
 
     private String password;
 
@@ -22,13 +22,16 @@ public class User {
 
     private String email;
 
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     @Timestamp
-    private LocalDateTime time_created;
+    @Column(name = "time_created")
+    private LocalDateTime timeCreated;
 
     @Timestamp
-    private LocalDateTime last_updated;
+    @Column(name = "last_updated")
+    private LocalDateTime lastUpdated;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "owner",cascade = CascadeType.ALL)
     private Set<Project> projectSet;
@@ -57,15 +60,15 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {this.phoneNumber = phoneNumber;}
 
-    public LocalDateTime getTimeCreated() {return time_created;}
+    public LocalDateTime getTimeCreated() {return timeCreated;}
 
-    public LocalDateTime getLastUpdated() {return last_updated;}
+    public LocalDateTime getLastUpdated() {return lastUpdated;}
 
     public Set<Project> getProjectSet() {return projectSet;}
 
-    public void setTimeCreated(LocalDateTime timeCreated) {this.time_created = timeCreated;}
+    public void setTimeCreated(LocalDateTime timeCreated) {this.timeCreated = timeCreated;}
 
-    public void setLastUpdated(LocalDateTime lastUpdated) {this.last_updated = lastUpdated;}
+    public void setLastUpdated(LocalDateTime lastUpdated) {this.lastUpdated = lastUpdated;}
 
     public void setProjectSet(Set<Project> projectSet) {this.projectSet = projectSet;}
 }
