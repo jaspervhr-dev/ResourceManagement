@@ -24,6 +24,7 @@ public class ResourceDetail {
     @JoinColumn(name = "resource_id")
     private Resource resource;
 
+
     public Integer getRecordId() {
         return recordId;
     }
@@ -62,5 +63,10 @@ public class ResourceDetail {
 
     public void setResource(Resource resource) {
         this.resource = resource;
+    }
+
+    @Override
+    public String toString(){
+        return "Id: "+this.recordId+"Column: "+this.column+"Create Time: "+this.timeCreated+"Resource: " +this.resource;
     }
 }

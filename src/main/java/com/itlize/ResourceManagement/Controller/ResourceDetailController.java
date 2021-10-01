@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping(value = "/resourcedetail")
 public class ResourceDetailController {
 
-
 //    @Autowired
 //    ResourceDetailService resourceDetailService;
 //

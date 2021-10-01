@@ -19,7 +19,6 @@ import java.util.List;
 @RequestMapping("resources")
 public class ResourceController {
 
-
 //    @Autowired
 //    ResourceService service;
 //
@@ -33,4 +32,3 @@ public class ResourceController {
 //        return service.findOneById(id);
 //    }
 }
-
