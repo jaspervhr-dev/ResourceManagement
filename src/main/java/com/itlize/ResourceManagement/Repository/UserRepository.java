@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
  * @author Jasper
  */
 
-@Repository
+
 public interface UserRepository extends JpaRepository<User,String> {
 }

@@ -66,8 +66,8 @@ public class Project {
 
     @Override
     public String toString(){
-        return "ProjectId: " + getProjectId() + "/n" +
-                "Project Name: " + getProjectName() + "/n" +
+        return "ProjectId: " + getProjectId() + "\n" +
+                "Project Name: " + getProjectName() + "\n" +
                 "Owner: " + getOwner();
     }
 }

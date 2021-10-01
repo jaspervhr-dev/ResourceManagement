@@ -73,10 +73,10 @@ public class User {
 
     @Override
     public String toString(){
-        return "Username: " + getUsername() + "/n" +
-                "Title: " + getTitle() + "/n" +
-                "Role: " + getRole() + "/n" +
-                "Email: " + getEmail() + "/n" +
+        return "Username: " + getUsername() + "\n" +
+                "Title: " + getTitle() + "\n" +
+                "Role: " + getRole() + "\n" +
+                "Email: " + getEmail() + "\n" +
                 "Phone#: " + getPhoneNumber();
     }
 }

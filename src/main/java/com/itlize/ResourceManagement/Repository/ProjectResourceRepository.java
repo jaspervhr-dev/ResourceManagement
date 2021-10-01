@@ -13,7 +13,7 @@ import java.util.List;
  * @date 9/30/21 11:56 AM
  */
 
-@Repository
+
 public interface ProjectResourceRepository extends JpaRepository<ProjectResource,Integer> {
   
     public List<ProjectResource> findByProject(Project project);

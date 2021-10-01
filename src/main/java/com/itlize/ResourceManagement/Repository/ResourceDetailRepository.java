@@ -13,7 +13,7 @@ import java.util.List;
  * @date 9/30/21 10:08 AM
  */
 
-@Repository
+
 public interface ResourceDetailRepository extends JpaRepository<ResourceDetail,Integer> {
 
     public List<ResourceDetail> findByColumn(ProjectColumn column);
