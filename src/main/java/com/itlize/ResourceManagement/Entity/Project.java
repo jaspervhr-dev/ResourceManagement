@@ -63,4 +63,11 @@ public class Project {
     }
 
     public void setProjectResourceSet(Set<ProjectResource> projectResourceSet) {this.projectResourceSet = projectResourceSet;}
+
+    @Override
+    public String toString(){
+        return "ProjectId: " + getProjectId() + "/n" +
+                "Project Name: " + getProjectName() + "/n" +
+                "Owner: " + getOwner();
+    }
 }
