@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
  * @date 9/29/21 11:41 AM
  */
 
-@Repository
 public interface ResourceRepository extends JpaRepository<Resource,Integer> {
     public Resource findByResourceId(Integer id);
 }
