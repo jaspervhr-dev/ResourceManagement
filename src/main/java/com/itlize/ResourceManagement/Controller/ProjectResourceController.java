@@ -16,18 +16,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/projectresource")
 public class ProjectResourceController {
-    @Autowired
-    ProjectResourceService service;
-
-    public List<ProjectResource> findAll(){
-        return service.findAll();
-    }
-
-    public List<ProjectResource> findByProject(@RequestParam("projectId") Integer id){
-        return service.findByProject(id);
-    }
-
-    public List<ProjectResource> findByResource(@RequestParam("resourceId") Integer id){
-        return service.findByResource(id);
-    }
+//    @Autowired
+//    ProjectResourceService service;
+//
+//    public List<ProjectResource> findAll(){
+//        return service.findAll();
+//    }
+//
+//    public List<ProjectResource> findByProject(@RequestParam("projectId") Integer id){
+//        return service.findByProject(id);
+//    }
+//
+//    public List<ProjectResource> findByResource(@RequestParam("resourceId") Integer id){
+//        return service.findByResource(id);
+//    }
 }

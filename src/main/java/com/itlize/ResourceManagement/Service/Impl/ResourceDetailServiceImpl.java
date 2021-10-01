@@ -19,25 +19,25 @@ import java.util.List;
 public class ResourceDetailServiceImpl implements ResourceDetailService {
 
     @Autowired
-    ResourceDetailRepository respository;
+    ResourceDetailRepository repository;
 
     @Override
     public List<ResourceDetail> findAll() {
-        return respository.findAll();
+        return repository.findAll();
     }
 
     @Override
-    public ResourceDetail findByResource(Resource resource) {
-        return respository.findByResource(resource);
+    public List<ResourceDetail> findByResource(Resource resource) {
+        return repository.findByResource(resource);
     }
 
     @Override
-    public ResourceDetail findByColumn(ProjectColumn column) {
-        return respository.findByColumn(column);
+    public List<ResourceDetail> findByColumn(ProjectColumn column) {
+        return repository.findByColumn(column);
     }
 
     @Override
     public void addOne(ResourceDetail resourceDetail){
-        respository.save(resourceDetail);
+        repository.save(resourceDetail);
     }
 }

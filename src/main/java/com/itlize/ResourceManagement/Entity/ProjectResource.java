@@ -59,4 +59,9 @@ public class ProjectResource {
     public void setResource(Resource resource) {
         this.resource = resource;
     }
+
+    @Override
+    public String toString(){
+        return "Id: "+this.recordId+"Project: "+this.project+"Create Time: "+this.timeCreated+"Resource: " +this.resource;
+    }
 }

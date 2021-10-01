@@ -64,4 +64,9 @@ public class ResourceDetail {
     public void setResource(Resource resource) {
         this.resource = resource;
     }
+
+    @Override
+    public String toString(){
+        return "Id: "+this.recordId+"Column: "+this.column+"Create Time: "+this.timeCreated+"Resource: " +this.resource;
+    }
 }

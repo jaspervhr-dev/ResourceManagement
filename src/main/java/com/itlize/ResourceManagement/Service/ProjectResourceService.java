@@ -14,7 +14,7 @@ import java.util.List;
 public interface ProjectResourceService {
     public List<ProjectResource> findAll();
 
-    public List<ProjectResource> findByProject(Project projectId);
+    public List<ProjectResource> findByProject(Project project);
 
     public List<ProjectResource> findByResource(Resource resource);
 
