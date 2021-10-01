@@ -1,6 +1,8 @@
 package com.itlize.ResourceManagement.Repository;
 
+import com.itlize.ResourceManagement.Entity.Project;
 import com.itlize.ResourceManagement.Entity.ProjectResource;
+import com.itlize.ResourceManagement.Entity.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,10 +15,10 @@ import java.util.List;
 
 @Repository
 public interface ProjectResourceRepository extends JpaRepository<ProjectResource,Integer> {
+  
+    public List<ProjectResource> findByProject(Project project);
 
-    public List<ProjectResource> findByProjectId(Integer projectId);
+    public List<ProjectResource> findByResource(Resource resource);
 
-    public List<ProjectResource> findByResourceId(Integer resourceId);
-
-    public List<ProjectResource> findByProjectIdAndAndResourceId(Integer projectID, Integer ResourceID);
+    public List<ProjectResource> findByProjectAndResource(Project project, Resource Resource);
 }

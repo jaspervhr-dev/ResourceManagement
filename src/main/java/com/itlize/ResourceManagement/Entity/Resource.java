@@ -11,26 +11,22 @@ import java.util.Set;
 public class Resource {
 
     @Id
-    @GeneratedValue
-    @Column(name = "resource_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int resourceId;
     
     @Column(name = "resource_name")
     private String resourceName;
 
     @Timestamp
-    @Column(name = "time_created")
     private LocalDateTime timeCreated;
 
     @Timestamp
-    @Column(name = "last_updated")
     private LocalDateTime lastUpdated;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<ProjectResource> projectResourceSet;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource", cascade = CascadeType.ALL)
-
     private Set<ResourceDetail> resourceDetailSet;
 
     public int getResourceId() {
@@ -53,15 +49,36 @@ public class Resource {
         return timeCreated;
     }
 
+    public void setTimeCreated(LocalDateTime timeCreated) {
+        this.timeCreated = timeCreated;
+    }
+
     public LocalDateTime getLastUpdated() {
         return lastUpdated;
+    }
+
+    public void setLastUpdated(LocalDateTime lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     public Set<ProjectResource> getProjectResourceSet() {
         return projectResourceSet;
     }
 
+    public void setProjectResourceSet(Set<ProjectResource> projectResourceSet) {
+        this.projectResourceSet = projectResourceSet;
+    }
+
     public Set<ResourceDetail> getResourceDetailSet() {
         return resourceDetailSet;
+    }
+
+    public void setResourceDetailSet(Set<ResourceDetail> resourceDetailSet) {
+        this.resourceDetailSet = resourceDetailSet;
+    }
+
+    @Override
+    public String toString(){
+        return "Id: "+this.resourceId+"Name: "+this.resourceName+"Create Time: "+this.timeCreated+"Last Updated: " +this.lastUpdated;
     }
 }

@@ -1,5 +1,8 @@
 package com.itlize.ResourceManagement.Service.Impl;
 
+import com.itlize.ResourceManagement.Entity.Project;
+import com.itlize.ResourceManagement.Entity.ProjectColumn;
+import com.itlize.ResourceManagement.Entity.Resource;
 import com.itlize.ResourceManagement.Entity.ResourceDetail;
 import com.itlize.ResourceManagement.Repository.ResourceDetailRepository;
 import com.itlize.ResourceManagement.Service.ResourceDetailService;
@@ -24,13 +27,13 @@ public class ResourceDetailServiceImpl implements ResourceDetailService {
     }
 
     @Override
-    public ResourceDetail findByResource(Integer resourceId) {
-        return respository.findByResourceId(resourceId);
+    public ResourceDetail findByResource(Resource resource) {
+        return respository.findByResource(resource);
     }
 
     @Override
-    public ResourceDetail findByColumn(Integer columnId) {
-        return respository.findByColumnId(columnId);
+    public ResourceDetail findByColumn(ProjectColumn column) {
+        return respository.findByColumn(column);
     }
 
     @Override

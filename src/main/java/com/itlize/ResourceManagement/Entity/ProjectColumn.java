@@ -7,14 +7,12 @@ import java.util.Set;
 @Table(name = "project_columns")
 public class ProjectColumn {
     @Id
-    @GeneratedValue
-    @Column(name = "column_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer columnId;
 
     @ManyToOne(targetEntity = Project.class,cascade = CascadeType.MERGE)
     @JoinColumn(name = "project_id")
     private Project project;
-
 
     @Column(name = "column_name")
     private String columnName;
@@ -25,7 +23,6 @@ public class ProjectColumn {
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "column",cascade = CascadeType.ALL)
     private Set<ResourceDetail> resourceDetailSet;
-
 
     public Integer getColumnId() {
         return columnId;
