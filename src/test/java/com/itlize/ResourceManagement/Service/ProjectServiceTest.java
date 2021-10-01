@@ -22,15 +22,11 @@ class ProjectServiceTest {
 
     @Test
     void findByUsername() {
-        User user = userRepository.getById("usertest1");
-        //TODO
-    }
+        User user = userRepository.getById("usertest2");
+        List<Project> projects = projectService.findByUsername(user);
+        assertNotNull(projects);
+        assertEquals(projects.size(), 3);
 
-    @Test
-    void findByProjectId() {
-        Project project = projectService.findByProjectId(1);
-        System.out.println(project);
-        assertNotNull(project);
     }
 
     @Test
