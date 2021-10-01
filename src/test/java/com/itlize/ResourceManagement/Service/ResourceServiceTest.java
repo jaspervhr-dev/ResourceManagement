@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,5 +33,13 @@ class ResourceServiceTest {
         List<Resource> resources = resourceService.findALl();
         System.out.println(resources);
         assertNotNull(resources);
+    }
+
+    @Test
+    public void saveTest(){
+        Resource resource = new Resource();
+        resource.setResourceName("testService");
+        resource.setTimeCreated(LocalDateTime.now());
+        resourceService.addOne(resource);
     }
 }

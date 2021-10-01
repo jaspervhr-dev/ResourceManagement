@@ -14,4 +14,6 @@ public interface ResourceService {
 
     public List<Resource> findALl();
 
+    public void addOne(Resource resource);
+
 }
