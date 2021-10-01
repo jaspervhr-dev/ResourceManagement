@@ -39,7 +39,7 @@ class ResourceDetailRepositoryTest {
         ProjectColumn projectColumn = new ProjectColumn();
         Project project = new Project();
         Resource resource = resourceRepository.findById(2).orElse(null);
-        project.setOwner(userRepository.findByUserName("siteng"));
+        project.setOwner(userRepository.findById("siteng").orElse(null));
         projectColumn.setProject(project);
         resourceDetail.setTimeCreated(LocalDateTime.now());
         resourceDetail.setResource(resource);
