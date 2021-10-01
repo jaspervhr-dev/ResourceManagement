@@ -13,7 +13,8 @@ public class Resource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int resourceId;
-
+    
+    @Column(name = "resource_name")
     private String resourceName;
 
     @Timestamp

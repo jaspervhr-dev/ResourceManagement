@@ -24,7 +24,6 @@ public class ResourceDetail {
     @JoinColumn(name = "resource_id")
     private Resource resource;
 
-
     public Integer getRecordId() {
         return recordId;
     }

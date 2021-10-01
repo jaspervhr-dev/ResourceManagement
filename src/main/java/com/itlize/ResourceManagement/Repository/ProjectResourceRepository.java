@@ -15,11 +15,10 @@ import java.util.List;
 
 @Repository
 public interface ProjectResourceRepository extends JpaRepository<ProjectResource,Integer> {
-
+  
     public List<ProjectResource> findByProject(Project project);
 
     public List<ProjectResource> findByResource(Resource resource);
 
     public List<ProjectResource> findByProjectAndResource(Project project, Resource Resource);
-
 }

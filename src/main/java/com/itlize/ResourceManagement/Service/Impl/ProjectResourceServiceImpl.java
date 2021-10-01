@@ -41,5 +41,4 @@ public class ProjectResourceServiceImpl implements ProjectResourceService {
     public List<ProjectResource> findByProjectAndResource(Project project, Resource resource) {
         return projectResourceRepository.findByProjectAndResource(project,resource);
     }
-
 }

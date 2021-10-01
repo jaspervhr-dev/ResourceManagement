@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface ResourceDetailService {
     public List<ResourceDetail> findAll();
-
+  
     public ResourceDetail findByResource(Resource resourceId);
 
     public ResourceDetail findByColumn(ProjectColumn columnId);

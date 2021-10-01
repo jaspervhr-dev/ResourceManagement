@@ -17,5 +17,4 @@ public interface ResourceDetailRepository extends JpaRepository<ResourceDetail,I
     public ResourceDetail findByColumn(ProjectColumn column);
 
     public ResourceDetail findByResource(Resource resource);
-
 }
