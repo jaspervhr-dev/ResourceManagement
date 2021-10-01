@@ -15,6 +15,11 @@ public class ProjectServiceImpl implements ProjectService {
     ProjectRepository projectRepository;
 
     @Override
+    public Project findById(Integer id){
+        return projectRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public List<Project> findByUsername(User user) {
         return projectRepository.findByOwner(user);
     }

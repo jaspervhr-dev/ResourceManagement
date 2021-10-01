@@ -17,6 +17,11 @@ public class ProjectColumnServiceImpl implements ProjectColumnService {
     ProjectColumnRepository projectColumnRepository;
 
     @Override
+    public ProjectColumn findById(Integer id){
+        return projectColumnRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public List<ProjectColumn> findByProject(Project project) {
         return projectColumnRepository.findByProject(project);
     }
