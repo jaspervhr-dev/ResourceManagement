@@ -17,32 +17,32 @@ import java.util.List;
 @RequestMapping(value = "/resourcedetail")
 public class ResourceDetailController {
 
-    @Autowired
-    ResourceDetailService resourceDetailService;
-
-    @GetMapping("/all")
-    public List<ResourceDetail> findAll(){
-        return resourceDetailService.findAll();
-    }
-    @GetMapping("/resource/{id}")
-    public ResourceDetail findByResource(@PathVariable Integer id){
-        return resourceDetailService.findByResource(id);
-    }
-
-    @GetMapping("/column/{id}")
-    public ResourceDetail findByColumn(@PathVariable Integer id){
-        return resourceDetailService.findByColumn(id);
-    }
-
-    @GetMapping("/addOne")
-    public void addOne(@RequestParam("resourceId") Integer resouceId,
-                       @RequestParam("columnId") Integer columnId,
-                       @RequestParam("columnValue") String columnValue){
-        LocalDateTime timeCreated = LocalDateTime.now();
-        ResourceDetail detail = new ResourceDetail();
-        detail.setResource_id(resouceId);
-        detail.setColumnId(columnId);
-        detail.setColumn_value(columnValue);
-        resourceDetailService.addOne(detail);
-    }
+//    @Autowired
+//    ResourceDetailService resourceDetailService;
+//
+//    @GetMapping("/all")
+//    public List<ResourceDetail> findAll(){
+//        return resourceDetailService.findAll();
+//    }
+//    @GetMapping("/resource/{id}")
+//    public ResourceDetail findByResource(@PathVariable Integer id){
+//        return resourceDetailService.findByResource(id);
+//    }
+//
+//    @GetMapping("/column/{id}")
+//    public ResourceDetail findByColumn(@PathVariable Integer id){
+//        return resourceDetailService.findByColumn(id);
+//    }
+//
+//    @PutMapping("/addOne")
+//    public void addOne(@RequestParam("resourceId") Integer resouceId,
+//                       @RequestParam("columnId") Integer columnId,
+//                       @RequestParam("columnValue") String columnValue){
+//        LocalDateTime timeCreated = LocalDateTime.now();
+//        ResourceDetail detail = new ResourceDetail();
+//        detail.setResource_id(resouceId);
+//        detail.setColumnId(columnId);
+//        detail.setColumn_value(columnValue);
+//        resourceDetailService.addOne(detail);
+//    }
 }

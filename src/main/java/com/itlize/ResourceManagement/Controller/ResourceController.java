@@ -19,16 +19,16 @@ import java.util.List;
 @RequestMapping("resources")
 public class ResourceController {
 
-    @Autowired
-    ResourceService service;
-
-    @GetMapping("/all")
-    public List<Resource> findAll(){
-        return service.findALl();
-    }
-
-    @GetMapping("/{id}")
-    public Resource findById(@PathVariable Integer id){
-        return service.findOneById(id);
-    }
+//    @Autowired
+//    ResourceService service;
+//
+//    @GetMapping("/all")
+//    public List<Resource> findAll(){
+//        return service.findALl();
+//    }
+//
+//    @GetMapping("/{id}")
+//    public Resource findById(@PathVariable Integer id){
+//        return service.findOneById(id);
+//    }
 }

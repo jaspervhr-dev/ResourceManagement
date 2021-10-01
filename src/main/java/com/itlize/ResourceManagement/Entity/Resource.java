@@ -11,7 +11,7 @@ import java.util.Set;
 public class Resource {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int resourceId;
 
     private String resourceName;
@@ -48,15 +48,36 @@ public class Resource {
         return timeCreated;
     }
 
+    public void setTimeCreated(LocalDateTime timeCreated) {
+        this.timeCreated = timeCreated;
+    }
+
     public LocalDateTime getLastUpdated() {
         return lastUpdated;
+    }
+
+    public void setLastUpdated(LocalDateTime lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     public Set<ProjectResource> getProjectResourceSet() {
         return projectResourceSet;
     }
 
+    public void setProjectResourceSet(Set<ProjectResource> projectResourceSet) {
+        this.projectResourceSet = projectResourceSet;
+    }
+
     public Set<ResourceDetail> getResourceDetailSet() {
         return resourceDetailSet;
+    }
+
+    public void setResourceDetailSet(Set<ResourceDetail> resourceDetailSet) {
+        this.resourceDetailSet = resourceDetailSet;
+    }
+
+    @Override
+    public String toString(){
+        return "Id: "+this.resourceId+"Name: "+this.resourceName+"Create Time: "+this.timeCreated+"Last Updated: " +this.lastUpdated;
     }
 }
