@@ -68,4 +68,13 @@ public class User {
     public void setLastUpdated(LocalDateTime lastUpdated) {this.last_updated = lastUpdated;}
 
     public void setProjectSet(Set<Project> projectSet) {this.projectSet = projectSet;}
+
+    @Override
+    public String toString(){
+        return "Username: " + getUsername() + "/n" +
+                "Title: " + getTitle() + "/n" +
+                "Role: " + getRole() + "/n" +
+                "Email: " + getEmail() + "/n" +
+                "Phone#: " + getPhoneNumber();
+    }
 }
