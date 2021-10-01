@@ -30,7 +30,7 @@ class ProjectResourceRepositoryTest {
 
     @Test
     public void saveTest(){
-        Project project = projectRepository.findByProjectId(1);
+        Project project = projectRepository.findById(1).orElse(null);
         Resource resource = resourceRepository.findByResourceId(2);
         ProjectResource projectResource = new ProjectResource();
         projectResource.setProject(project);
@@ -50,7 +50,7 @@ class ProjectResourceRepositoryTest {
 
     @Test
     public void findByProjectTest(){
-        Project project = projectRepository.findByProjectId(1);
+        Project project = projectRepository.findById(1).orElse(null);
         List<ProjectResource> projectResourceList = projectResourceRepository.findByProject(project);
         System.out.println(projectResourceList);
         assertNotNull(projectResourceList);
@@ -58,7 +58,7 @@ class ProjectResourceRepositoryTest {
 
     @Test
     public void findByResourceAndProjectTest(){
-        Project project = projectRepository.findByProjectId(1);
+        Project project = projectRepository.findById(1).orElse(null);
         Resource resource = resourceRepository.findByResourceId(2);
         List<ProjectResource> projectResourceList = projectResourceRepository.findByProjectAndResource(project,resource);
         System.out.println(projectResourceList);

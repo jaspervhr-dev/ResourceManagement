@@ -24,8 +24,4 @@ public class ProjectServiceImpl implements ProjectService {
         return projectRepository.findAll();
     }
 
-    @Override
-    public Project findByProjectId(Integer id){
-        return projectRepository.findByProjectId(id);
-    }
 }

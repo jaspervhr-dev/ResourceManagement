@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface ProjectService {
     public List<Project> findByUsername(User user);
-    public Project findByProjectId(Integer id);
     public List<Project> findAll();
 }

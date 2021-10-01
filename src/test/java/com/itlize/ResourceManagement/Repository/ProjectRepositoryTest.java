@@ -43,7 +43,7 @@ class ProjectRepositoryTest {
 
     @Test
     void findByProjectId() {
-        Project project = projectRepository.findByProjectId(1);
+        Project project = projectRepository.findById(1).orElse(null);
         assertNotNull(project);
         assertEquals(project.getProjectName(), "projecttest");
     }

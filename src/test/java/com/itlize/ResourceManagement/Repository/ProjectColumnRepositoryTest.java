@@ -22,7 +22,7 @@ class ProjectColumnRepositoryTest {
 
     @Test
     void saveTest(){
-        Project project = projectRepository.findByProjectId(1);
+        Project project = projectRepository.findById(1).orElse(null);
         ProjectColumn projectColumn = new ProjectColumn();
         projectColumn.setColumnId(1);
         projectColumn.setType(Type.number);
@@ -34,7 +34,7 @@ class ProjectColumnRepositoryTest {
 
     @Test
     void findByProject() {
-        Project project = projectRepository.findByProjectId(1);
+        Project project = projectRepository.findById(1).orElse(null);
         List<ProjectColumn> projectColumn = projectColumnRepository.findByProject(project);
         assertEquals(projectColumn.get(0).getColumnName(), "columntest");
     }
