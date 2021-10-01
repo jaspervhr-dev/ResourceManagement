@@ -1,5 +1,6 @@
 package com.itlize.ResourceManagement.Service.Impl;
 
+import com.itlize.ResourceManagement.Entity.Project;
 import com.itlize.ResourceManagement.Entity.ProjectColumn;
 import com.itlize.ResourceManagement.Repository.ProjectColumnRepository;
 import com.itlize.ResourceManagement.Service.ProjectColumnService;
@@ -18,8 +19,8 @@ public class ProjectColumnServiceImpl implements ProjectColumnService {
     }
 
     @Override
-    public List<ProjectColumn> findByProject(Integer id) {
-        return projectColumnRepository.findByProject(id);
+    public List<ProjectColumn> findByProject(Project project) {
+        return projectColumnRepository.findByProject(project);
     }
 
     @Override
@@ -28,7 +29,7 @@ public class ProjectColumnServiceImpl implements ProjectColumnService {
     }
 
     @Override
-    public ProjectColumn findByProjectAndColumnId(Integer pid, Integer cid){
-        return projectColumnRepository.findByProjectAndColumnId(pid, cid);
+    public ProjectColumn findByProjectAndColumnId(Project project, Integer cid){
+        return projectColumnRepository.findByProjectAndColumnId(project, cid);
     }
 }
