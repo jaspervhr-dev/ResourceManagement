@@ -11,4 +11,5 @@ public interface ProjectColumnService{
     public List<ProjectColumn> findByProject(Project project);
     public ProjectColumn findByProjectAndColumnId(Project project, Integer cid);
     public List<ProjectColumn> findAll();
+    public void addOne(ProjectColumn projectColumn);
 }

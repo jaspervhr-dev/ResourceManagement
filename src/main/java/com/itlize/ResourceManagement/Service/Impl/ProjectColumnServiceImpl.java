@@ -32,6 +32,11 @@ public class ProjectColumnServiceImpl implements ProjectColumnService {
     }
 
     @Override
+    public void addOne(ProjectColumn projectColumn) {
+        projectColumnRepository.save(projectColumn);
+    }
+
+    @Override
     public ProjectColumn findByProjectAndColumnId(Project project, Integer cid){
         return projectColumnRepository.findByProjectAndColumnId(project, cid);
     }

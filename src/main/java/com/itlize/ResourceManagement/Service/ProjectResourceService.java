@@ -19,4 +19,10 @@ public interface ProjectResourceService {
     public List<ProjectResource> findByResource(Resource resource);
 
     public List<ProjectResource> findByProjectAndResource(Project project, Resource resource);
+
+    public void deleteByEntity(ProjectResource projectResource);
+
+    public void deleteAll(List<ProjectResource> projectResourceList);
+
+    public void addOne(Project project, Resource resource);
 }
