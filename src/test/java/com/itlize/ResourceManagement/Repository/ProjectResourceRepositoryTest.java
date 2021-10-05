@@ -60,7 +60,7 @@ class ProjectResourceRepositoryTest {
     public void findByResourceAndProjectTest(){
         Project project = projectRepository.findById(1).orElse(null);
         Resource resource = resourceRepository.findByResourceId(2);
-        List<ProjectResource> projectResourceList = projectResourceRepository.findByProjectAndResource(project,resource);
+        ProjectResource projectResourceList = projectResourceRepository.findByProjectAndResource(project,resource);
         System.out.println(projectResourceList);
         assertNotNull(projectResourceList);
     }

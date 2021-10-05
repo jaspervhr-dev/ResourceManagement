@@ -20,5 +20,5 @@ public interface ProjectResourceRepository extends JpaRepository<ProjectResource
 
     public List<ProjectResource> findByResource(Resource resource);
 
-    public List<ProjectResource> findByProjectAndResource(Project project, Resource Resource);
+    public ProjectResource findByProjectAndResource(Project project, Resource Resource);
 }

@@ -21,18 +21,23 @@ class ProjectServiceTest {
     UserRepository userRepository;
 
     @Test
-    void findByUsername() {
+    void findByUser() {
         User user = userRepository.getById("usertest2");
-        List<Project> projects = projectService.findByUsername(user);
+        List<Project> projects = projectService.findByUser(user);
         assertNotNull(projects);
-        assertEquals(projects.size(), 3);
-
+        assertEquals(projects.size(), 4);
     }
 
     @Test
     void findAll() {
         List<Project> projects = projectService.findAll();
         assertNotNull(projects);
-        assertEquals(projects.size(), 4);
+        assertEquals(projects.size(), 5);
+    }
+
+    @Test
+    void findById(){
+        Project project = projectService.findById(1);
+        assertNotNull(project);
     }
 }

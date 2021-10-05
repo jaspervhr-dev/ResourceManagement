@@ -18,5 +18,11 @@ public interface ProjectResourceService {
 
     public List<ProjectResource> findByResource(Resource resource);
 
-    public List<ProjectResource> findByProjectAndResource(Project project, Resource resource);
+    public ProjectResource findByProjectAndResource(Project project, Resource resource);
+
+    public ProjectResource save(ProjectResource pr);
+
+    public ProjectResource create(Project project, Resource resource);
+
+    public void delete(ProjectResource pr);
 }

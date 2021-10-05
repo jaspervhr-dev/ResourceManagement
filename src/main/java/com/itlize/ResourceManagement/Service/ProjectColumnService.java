@@ -4,7 +4,6 @@ import com.itlize.ResourceManagement.Entity.Project;
 import com.itlize.ResourceManagement.Entity.ProjectColumn;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProjectColumnService{
     public ProjectColumn findById(Integer id);
