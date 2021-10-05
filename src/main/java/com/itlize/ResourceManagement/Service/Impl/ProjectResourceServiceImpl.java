@@ -38,7 +38,7 @@ public class ProjectResourceServiceImpl implements ProjectResourceService {
     }
 
     @Override
-    public List<ProjectResource> findByProjectAndResource(Project project, Resource resource) {
+    public ProjectResource findByProjectAndResource(Project project, Resource resource) {
         return projectResourceRepository.findByProjectAndResource(project,resource);
     }
 
@@ -58,5 +58,24 @@ public class ProjectResourceServiceImpl implements ProjectResourceService {
         projectResource.setResource(resource);
         projectResource.setProject(project);
         projectResourceRepository.save(projectResource);
+    }
+
+    public ProjectResource save(ProjectResource pr){
+        projectResourceRepository.save(pr);
+        return pr;
+    }
+
+    @Override
+    public ProjectResource create(Project project, Resource resource){
+        ProjectResource projectResource = new ProjectResource();
+        projectResource.setResource(resource);
+        projectResource.setProject(project);
+        projectResourceRepository.save(projectResource);
+        return projectResource;
+    }
+
+    @Override
+    public void delete(ProjectResource pr){
+        projectResourceRepository.delete(pr);
     }
 }
