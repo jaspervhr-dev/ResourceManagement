@@ -17,6 +17,7 @@ public class ProjectColumn {
     @Column(name = "column_name")
     private String columnName;
 
+    @Enumerated(EnumType.ORDINAL)
     private Type type;
 
     private String formulaText;
