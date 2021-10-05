@@ -1,5 +1,7 @@
 package com.itlize.ResourceManagement.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -17,10 +19,12 @@ public class ResourceDetail {
     private String columnValue;
 
     @ManyToOne(targetEntity = ProjectColumn.class,cascade = CascadeType.MERGE)
+    @JsonIgnore
     @JoinColumn(name = "column_id")
     private ProjectColumn column;
 
     @ManyToOne(targetEntity = Resource.class,cascade = CascadeType.MERGE)
+    @JsonIgnore
     @JoinColumn(name = "resource_id")
     private Resource resource;
 

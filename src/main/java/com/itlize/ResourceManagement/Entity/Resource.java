@@ -1,5 +1,6 @@
 package com.itlize.ResourceManagement.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jdk.jfr.Timestamp;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class Resource {
     private LocalDateTime lastUpdated;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JsonIgnore
     private Set<ProjectResource> projectResourceSet;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "resource", cascade = CascadeType.ALL)

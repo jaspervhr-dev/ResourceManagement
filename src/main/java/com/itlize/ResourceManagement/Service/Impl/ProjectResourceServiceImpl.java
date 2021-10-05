@@ -43,6 +43,23 @@ public class ProjectResourceServiceImpl implements ProjectResourceService {
     }
 
     @Override
+    public void deleteByEntity(ProjectResource projectResource){
+        projectResourceRepository.delete(projectResource);
+    }
+
+    @Override
+    public void deleteAll(List<ProjectResource> projectResourceList) {
+        projectResourceRepository.deleteAll(projectResourceList);
+    }
+
+    @Override
+    public void addOne(Project project, Resource resource) {
+        ProjectResource projectResource = new ProjectResource();
+        projectResource.setResource(resource);
+        projectResource.setProject(project);
+        projectResourceRepository.save(projectResource);
+    }
+
     public ProjectResource save(ProjectResource pr){
         projectResourceRepository.save(pr);
         return pr;

@@ -1,5 +1,6 @@
 package com.itlize.ResourceManagement.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jdk.jfr.Timestamp;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Project {
     private LocalDateTime timeCreated;
 
     @ManyToOne(targetEntity = User.class,cascade = CascadeType.MERGE)
+    @JsonIgnore
     @JoinColumn(name = "owner")
     private User owner;
 
