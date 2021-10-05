@@ -79,46 +79,46 @@ public class ResourceController {
     }
 
     /**
-     * this method is used to delete one resource in a project
+     * this method is used to delete one resource from a project
      */
-    @DeleteMapping("/deleteOne")
-    public ResponseEntity deleteOneFromProject(@RequestParam Integer projectId,
-                                     @RequestParam Integer resourceId) {
-        Project project = projectService.findById(projectId);
-        List<ProjectResource> projectResourceList = projectResourceService.findByProject(project);
-        ProjectResource projectResource = null;
-        for (ProjectResource pR : projectResourceList) {
-            if (pR.getResource().getResourceId() == resourceId) {
-                projectResource = pR;
-            }
-        }
-        projectResourceService.deleteByEntity(projectResource);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    @DeleteMapping("/deleteOne")
+//    public ResponseEntity deleteOneFromProject(@RequestParam Integer projectId,
+//                                     @RequestParam Integer resourceId) {
+//        Project project = projectService.findById(projectId);
+//        List<ProjectResource> projectResourceList = projectResourceService.findByProject(project);
+//        ProjectResource projectResource = null;
+//        for (ProjectResource pR : projectResourceList) {
+//            if (pR.getResource().getResourceId() == resourceId) {
+//                projectResource = pR;
+//            }
+//        }
+//        projectResourceService.deleteByEntity(projectResource);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
     /***
      * Delete All project-resource in one project
      */
-    @DeleteMapping("/deleteAllInProject/{id}")
-    public void deleteAllInProject(@PathVariable Integer id) {
-        Project project = projectService.findById(id);
-        List<ProjectResource> projectResourceList = projectResourceService.findByProject(project);
-        projectResourceService.deleteAll(projectResourceList);
-    }
+//    @DeleteMapping("/deleteAllInProject/{id}")
+//    public void deleteAllInProject(@PathVariable Integer id) {
+//        Project project = projectService.findById(id);
+//        List<ProjectResource> projectResourceList = projectResourceService.findByProject(project);
+//        projectResourceService.deleteAll(projectResourceList);
+//    }
 
-    /***
-     * Add one Project-Resource depends on projectId and resourceId
-     * @param projectId Project ID
-     * @param resourceId Resource ID
-     */
-    @PutMapping("/addProjectResource")
-    public ResponseEntity addOneProjectResource(@RequestParam Integer projectId,
-                                      @RequestParam Integer resourceId) {
-        Project project = projectService.findById(projectId);
-        Resource resource = resourceService.findOneById(resourceId);
-        projectResourceService.addOne(project, resource);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    /***
+//     * Add one Project-Resource depends on projectId and resourceId
+//     * @param projectId Project ID
+//     * @param resourceId Resource ID
+//     */
+//    @PutMapping("/addProjectResource")
+//    public ResponseEntity addOneProjectResource(@RequestParam Integer projectId,
+//                                      @RequestParam Integer resourceId) {
+//        Project project = projectService.findById(projectId);
+//        Resource resource = resourceService.findOneById(resourceId);
+//        projectResourceService.addOne(project, resource);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
     /***
      * add a column for all resources.
@@ -139,14 +139,14 @@ public class ResourceController {
      * @param columnValue the updated value
      * @param projectId the project that the column belongs to
      * @param resourceId the resource that the value belongs to
-     * @param ColumnName the name of the column that need to be updated
+     * @param columnName the name of the column that need to be updated
      * @return Response Entity
      */
     @PutMapping("/addColumnValue")
     public ResponseEntity addColumnValueToResource(@RequestParam String columnValue,
                                          @RequestParam Integer projectId,
                                          @RequestParam Integer resourceId,
-                                         @RequestParam String ColumnName){
+                                         @RequestParam String columnName){
         Project project = projectService.findById(projectId);
         Resource resource = resourceService.findOneById(resourceId);
         List<ProjectColumn> projectColumnList = projectColumnService.findByProject(project);
@@ -154,7 +154,7 @@ public class ResourceController {
         resourceDetail.setResource(resource);
         resourceDetail.setColumnValue(columnValue);
         for(ProjectColumn projectColumn:projectColumnList){
-            if (Objects.equals(projectColumn.getColumnName(), ColumnName)){
+            if (Objects.equals(projectColumn.getColumnName(), columnName)){
                 resourceDetail.setColumn(projectColumn);
                 resourceDetailService.addOne(resourceDetail);
                 return new ResponseEntity<>(HttpStatus.OK);
@@ -176,8 +176,9 @@ public class ResourceController {
                                   @RequestParam Integer projectId){
         Resource resource = resourceService.findOneById(resourceId);
         Set<ResourceDetail> resourceDetailSet = resource.getResourceDetailSet();
+        Project project = projectService.findById(projectId);
         for (ResourceDetail resourceDetail:resourceDetailSet){
-            if(resourceDetail.getColumn().getColumnId()==projectId&&resourceDetail.getColumn().getColumnName()==columnName){
+            if(Objects.equals(project,resourceDetail.getColumn().getProject())&& Objects.equals(resourceDetail.getColumn().getColumnName(), columnName)){
                 resourceDetail.setColumnValue(columnValue);
                 resourceDetailService.addOne(resourceDetail);
                 return new ResponseEntity<>(HttpStatus.OK);
