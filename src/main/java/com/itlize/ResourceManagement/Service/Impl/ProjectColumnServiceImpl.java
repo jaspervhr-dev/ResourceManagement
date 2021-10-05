@@ -37,6 +37,11 @@ public class ProjectColumnServiceImpl implements ProjectColumnService {
     }
 
     @Override
+    public void deleteOne(ProjectColumn projectColumn) {
+        projectColumnRepository.delete(projectColumn);
+    }
+
+    @Override
     public ProjectColumn findByProjectAndColumnId(Project project, Integer cid){
         return projectColumnRepository.findByProjectAndColumnId(project, cid);
     }
