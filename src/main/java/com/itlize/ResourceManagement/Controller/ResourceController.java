@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,8 +56,9 @@ public class ResourceController {
         Resource resource = new Resource();
         resource.setResourceName(resourceName);
         resource.setTimeCreated(LocalDateTime.now());
+        resource.setLastUpdated(LocalDateTime.now());
         resourceService.addOne(resource);
-        return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 
@@ -73,7 +75,7 @@ public class ResourceController {
         for (ProjectResource pR : projectResourceList) {
             resourceList.add(pR.getResource());
         }
-        return new ResponseEntity<List<Resource>>(resourceList,HttpStatus.OK);
+        return new ResponseEntity<>(resourceList,HttpStatus.OK);
     }
 
     /**
@@ -91,7 +93,7 @@ public class ResourceController {
             }
         }
         projectResourceService.deleteByEntity(projectResource);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /***
@@ -115,13 +117,13 @@ public class ResourceController {
         Project project = projectService.findById(projectId);
         Resource resource = resourceService.findOneById(resourceId);
         projectResourceService.addOne(project, resource);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /***
      * add a column for all resources.
-     * column = 0 means this column is for all resources
-     * @param columnName
+     * projectId = 0 means this the column belongs to this project is for all resources
+     * @param columnName THe name of the column
      */
     @PutMapping("/addColumn")
     public void addColumnToAllResources(@RequestParam String columnName){
@@ -132,6 +134,14 @@ public class ResourceController {
         projectColumnService.addOne(projectColumn);
     }
 
+    /***
+     * add a column value for the column
+     * @param columnValue the updated value
+     * @param projectId the project that the column belongs to
+     * @param resourceId the resource that the value belongs to
+     * @param ColumnName the name of the column that need to be updated
+     * @return Response Entity
+     */
     @PutMapping("/addColumnValue")
     public ResponseEntity addColumnValueToResource(@RequestParam String columnValue,
                                          @RequestParam Integer projectId,
@@ -142,13 +152,15 @@ public class ResourceController {
         List<ProjectColumn> projectColumnList = projectColumnService.findByProject(project);
         ResourceDetail resourceDetail = new ResourceDetail();
         resourceDetail.setResource(resource);
+        resourceDetail.setColumnValue(columnValue);
         for(ProjectColumn projectColumn:projectColumnList){
             if (Objects.equals(projectColumn.getColumnName(), ColumnName)){
                 resourceDetail.setColumn(projectColumn);
+                resourceDetailService.addOne(resourceDetail);
+                return new ResponseEntity<>(HttpStatus.OK);
             }
         }
-        resourceDetailService.addOne(resourceDetail);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     /***
@@ -158,17 +170,47 @@ public class ResourceController {
      * @param resourceId Resource ID which this column belongs to
      */
     @PutMapping("/updateColumnValue")
-    public void updateColumnValue(@RequestParam String columnValue,
+    public ResponseEntity updateColumnValue(@RequestParam String columnValue,
                                   @RequestParam String columnName,
-                                  @RequestParam Integer resourceId){
+                                  @RequestParam Integer resourceId,
+                                  @RequestParam Integer projectId){
         Resource resource = resourceService.findOneById(resourceId);
         Set<ResourceDetail> resourceDetailSet = resource.getResourceDetailSet();
         for (ResourceDetail resourceDetail:resourceDetailSet){
-            if(resourceDetail.getColumn().getColumnId()==0&&resourceDetail.getColumn().getColumnName()==columnName){
+            if(resourceDetail.getColumn().getColumnId()==projectId&&resourceDetail.getColumn().getColumnName()==columnName){
                 resourceDetail.setColumnValue(columnValue);
                 resourceDetailService.addOne(resourceDetail);
+                return new ResponseEntity<>(HttpStatus.OK);
             }
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    /***
+     * re
+     * @param resource
+     * @param project
+     * @param columnName
+     * @return
+     */
+    @RequestMapping("/columnValue")
+    public ResponseEntity<String> findColumnValue(@RequestBody Resource resource,
+                                                  @RequestBody Project project,
+                                                  @RequestParam String columnName){
+        List<ProjectColumn> projectColumnList = projectColumnService.findByProject(project);
+        ProjectColumn projectColumn = null;
+        for(ProjectColumn p:projectColumnList){
+            if(Objects.equals(p.getColumnName(), columnName)){
+                projectColumn=p;
+            }
+        }
+        List<ResourceDetail> resourceDetailList = resourceDetailService.findByResource(resource);
+        for(ResourceDetail r:resourceDetailList){
+            if(r.getColumn()==projectColumn){
+                return new ResponseEntity<>(r.getColumnValue(),HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 }
