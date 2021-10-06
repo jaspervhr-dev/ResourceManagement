@@ -56,8 +56,17 @@ class ProjectResourceServiceTest {
     void findByProjectAndResource() {
         Resource resource = resourceService.findOneById(2);
         Project project = projectService.findById(1);
-        List<ProjectResource> projectResourceList = projectResourceService.findByProjectAndResource(project,resource);
-        System.out.println(projectResourceList);
-        assertNotNull(projectResourceList);
+        ProjectResource projectResource = projectResourceService.findByProjectAndResource(project,resource);
+        System.out.println(projectResource);
+        assertNotNull(projectResource);
+    }
+
+    @Test
+    void create() {
+        Resource resource = resourceService.findOneById(1);
+        Project project = projectService.findById(1);
+        ProjectResource projectResource = projectResourceService.create(project,resource);
+        assertNotNull(projectResource);
+        System.out.println(projectResource);
     }
 }

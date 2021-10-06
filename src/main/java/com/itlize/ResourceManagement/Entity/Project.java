@@ -30,6 +30,17 @@ public class Project {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "project",cascade = CascadeType.ALL)
     private Set<ProjectResource> projectResourceSet;
 
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "project",cascade = CascadeType.ALL)
+    private Set<ProjectColumn> projectColumnSet;
+
+    public Set<ProjectColumn> getProjectColumnSet() {
+        return projectColumnSet;
+    }
+
+    public void setProjectColumnSet(Set<ProjectColumn> projectColumnSet) {
+        this.projectColumnSet = projectColumnSet;
+    }
+
     public int getProjectId() {
         return projectId;
     }
@@ -46,9 +57,7 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public User getOwner() {
-        return owner;
-    }
+    public User getOwner() {return owner;}
 
     public void setOwner(User owner) {
         this.owner = owner;

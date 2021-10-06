@@ -40,4 +40,23 @@ class ProjectServiceTest {
         Project project = projectService.findById(1);
         assertNotNull(project);
     }
+
+    @Test
+    void create(){
+        User user = userRepository.getById("jasper");
+        Project project = projectService.create(user);
+        assertNotNull(project);
+    }
+
+    @Test
+    void save(){
+        Project project = projectService.findById(1);
+        project.setProjectName("update_name_test");
+        projectService.save(project);
+    }
+
+//    @Test
+//    void delete(){
+//        Project project = projectService.findById()
+//    }
 }
