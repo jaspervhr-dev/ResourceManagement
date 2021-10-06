@@ -120,18 +120,34 @@ public class ResourceController {
 //        return new ResponseEntity<>(HttpStatus.OK);
 //    }
 
+//    /***
+//     * add a column for all resources.
+//     * projectId = 0 means this the column belongs to this project is for all resources
+//     * @param columnName THe name of the column
+//     */
+//    @PutMapping("/addColumn")
+//    public void addColumnToAllResources(@RequestParam String columnName){
+//        Project project = projectService.findById(0);
+//        ProjectColumn projectColumn = new ProjectColumn();
+//        projectColumn.setProject(project);
+//        projectColumn.setColumnName(columnName);
+//        projectColumnService.addOne(projectColumn);
+//    }
+
     /***
-     * add a column for all resources.
-     * projectId = 0 means this the column belongs to this project is for all resources
-     * @param columnName THe name of the column
+     * add column to special project
+     * @param columnName the name of new column
+     * @param projectId the Id of the project which this column add to.
      */
     @PutMapping("/addColumn")
-    public void addColumnToAllResources(@RequestParam String columnName){
-        Project project = projectService.findById(0);
+    public ResponseEntity addColumn(@RequestParam String columnName,
+                                    @RequestParam Integer projectId){
+        Project project = projectService.findById(projectId);
         ProjectColumn projectColumn = new ProjectColumn();
         projectColumn.setProject(project);
         projectColumn.setColumnName(columnName);
         projectColumnService.addOne(projectColumn);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /***
@@ -164,7 +180,7 @@ public class ResourceController {
     }
 
     /***
-     * update a column value for a column of all resources
+     * update a column value
      * @param columnValue The value of this column
      * @param columnName The name of this column
      * @param resourceId Resource ID which this column belongs to
@@ -188,16 +204,17 @@ public class ResourceController {
     }
 
     /***
-     * re
-     * @param resource
-     * @param project
-     * @param columnName
-     * @return
+     * get a column value
+     * @param resourceId resource ID
+     * @param projectId project ID
+     * @param columnName the name of column
      */
     @RequestMapping("/columnValue")
-    public ResponseEntity<String> findColumnValue(@RequestBody Resource resource,
-                                                  @RequestBody Project project,
+    public ResponseEntity<String> findColumnValue(@RequestParam Integer resourceId,
+                                                  @RequestParam Integer projectId,
                                                   @RequestParam String columnName){
+        Project project = projectService.findById(projectId);
+        Resource resource = resourceService.findOneById(resourceId);
         List<ProjectColumn> projectColumnList = projectColumnService.findByProject(project);
         ProjectColumn projectColumn = null;
         for(ProjectColumn p:projectColumnList){
@@ -207,7 +224,7 @@ public class ResourceController {
         }
         List<ResourceDetail> resourceDetailList = resourceDetailService.findByResource(resource);
         for(ResourceDetail r:resourceDetailList){
-            if(r.getColumn()==projectColumn){
+            if(Objects.equals(projectColumn,r.getColumn())){
                 return new ResponseEntity<>(r.getColumnValue(),HttpStatus.OK);
             }
         }
