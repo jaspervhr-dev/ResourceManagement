@@ -44,32 +44,37 @@ public class ResourceController {
         return new ResponseEntity<>(resourceList, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Resource> findById(@PathVariable Integer id) {
-        Resource resource = resourceService.findOneById(id);
-
+    @GetMapping("/findOne")
+    public ResponseEntity<?> findById(@RequestParam("resourceId") Integer resourceId) {
+        Resource resource = resourceService.findOneById(resourceId);
+        if (resource==null){
+            return new ResponseEntity<>("can't find resource",HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(resource,HttpStatus.OK);
     }
 
     @PutMapping("/add")
-    public ResponseEntity addOne(@RequestParam("resourceName") String resourceName) {
+    public ResponseEntity<?> addOne(@RequestParam("resourceName") String resourceName) {
         Resource resource = new Resource();
         resource.setResourceName(resourceName);
         resource.setTimeCreated(LocalDateTime.now());
         resource.setLastUpdated(LocalDateTime.now());
         resourceService.addOne(resource);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("Successfully added",HttpStatus.CREATED);
     }
 
 
     /***
      * Find All resource in one Project
-     * @param id Project ID
+     * @param projectId Project ID
      * @return List<Resource></>
      */
-    @GetMapping("/project/{id}")
-    public ResponseEntity<List<Resource>> findByProject(@PathVariable Integer id) {
-        Project project = projectService.findById(id);
+    @GetMapping("/project")
+    public ResponseEntity<?> findByProject(@RequestParam Integer projectId) {
+        Project project = projectService.findById(projectId);
+        if(project==null){
+            return new ResponseEntity<>("can't find project",HttpStatus.BAD_REQUEST);
+        }
         List<ProjectResource> projectResourceList = projectResourceService.findByProject(project);
         List<Resource> resourceList = new ArrayList<>();
         for (ProjectResource pR : projectResourceList) {
@@ -79,59 +84,75 @@ public class ResourceController {
     }
 
     /**
-     * this method is used to delete one resource in a project
+     * this method is used to delete one resource from a project
      */
-    @DeleteMapping("/deleteOne")
-    public ResponseEntity deleteOneFromProject(@RequestParam Integer projectId,
-                                     @RequestParam Integer resourceId) {
-        Project project = projectService.findById(projectId);
-        List<ProjectResource> projectResourceList = projectResourceService.findByProject(project);
-        ProjectResource projectResource = null;
-        for (ProjectResource pR : projectResourceList) {
-            if (pR.getResource().getResourceId() == resourceId) {
-                projectResource = pR;
-            }
-        }
-        projectResourceService.deleteByEntity(projectResource);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    @DeleteMapping("/deleteOne")
+//    public ResponseEntity deleteOneFromProject(@RequestParam Integer projectId,
+//                                     @RequestParam Integer resourceId) {
+//        Project project = projectService.findById(projectId);
+//        List<ProjectResource> projectResourceList = projectResourceService.findByProject(project);
+//        ProjectResource projectResource = null;
+//        for (ProjectResource pR : projectResourceList) {
+//            if (pR.getResource().getResourceId() == resourceId) {
+//                projectResource = pR;
+//            }
+//        }
+//        projectResourceService.deleteByEntity(projectResource);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
     /***
      * Delete All project-resource in one project
      */
-    @DeleteMapping("/deleteAllInProject/{id}")
-    public void deleteAllInProject(@PathVariable Integer id) {
-        Project project = projectService.findById(id);
-        List<ProjectResource> projectResourceList = projectResourceService.findByProject(project);
-        projectResourceService.deleteAll(projectResourceList);
-    }
+//    @DeleteMapping("/deleteAllInProject/{id}")
+//    public void deleteAllInProject(@PathVariable Integer id) {
+//        Project project = projectService.findById(id);
+//        List<ProjectResource> projectResourceList = projectResourceService.findByProject(project);
+//        projectResourceService.deleteAll(projectResourceList);
+//    }
+
+//    /***
+//     * Add one Project-Resource depends on projectId and resourceId
+//     * @param projectId Project ID
+//     * @param resourceId Resource ID
+//     */
+//    @PutMapping("/addProjectResource")
+//    public ResponseEntity addOneProjectResource(@RequestParam Integer projectId,
+//                                      @RequestParam Integer resourceId) {
+//        Project project = projectService.findById(projectId);
+//        Resource resource = resourceService.findOneById(resourceId);
+//        projectResourceService.addOne(project, resource);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+
+//    /***
+//     * add a column for all resources.
+//     * projectId = 0 means this the column belongs to this project is for all resources
+//     * @param columnName THe name of the column
+//     */
+//    @PutMapping("/addColumn")
+//    public void addColumnToAllResources(@RequestParam String columnName){
+//        Project project = projectService.findById(0);
+//        ProjectColumn projectColumn = new ProjectColumn();
+//        projectColumn.setProject(project);
+//        projectColumn.setColumnName(columnName);
+//        projectColumnService.addOne(projectColumn);
+//    }
 
     /***
-     * Add one Project-Resource depends on projectId and resourceId
-     * @param projectId Project ID
-     * @param resourceId Resource ID
-     */
-    @PutMapping("/addProjectResource")
-    public ResponseEntity addOneProjectResource(@RequestParam Integer projectId,
-                                      @RequestParam Integer resourceId) {
-        Project project = projectService.findById(projectId);
-        Resource resource = resourceService.findOneById(resourceId);
-        projectResourceService.addOne(project, resource);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    /***
-     * add a column for all resources.
-     * projectId = 0 means this the column belongs to this project is for all resources
-     * @param columnName THe name of the column
+     * add column to special project
+     * @param columnName the name of new column
+     * @param projectId the Id of the project which this column add to.
      */
     @PutMapping("/addColumn")
-    public void addColumnToAllResources(@RequestParam String columnName){
-        Project project = projectService.findById(0);
+    public ResponseEntity<?> addColumn(@RequestParam String columnName,
+                                    @RequestParam Integer projectId){
+        Project project = projectService.findById(projectId);
         ProjectColumn projectColumn = new ProjectColumn();
         projectColumn.setProject(project);
         projectColumn.setColumnName(columnName);
         projectColumnService.addOne(projectColumn);
+        return new ResponseEntity<>("Successfully added",HttpStatus.OK);
     }
 
     /***
@@ -139,14 +160,14 @@ public class ResourceController {
      * @param columnValue the updated value
      * @param projectId the project that the column belongs to
      * @param resourceId the resource that the value belongs to
-     * @param ColumnName the name of the column that need to be updated
+     * @param columnName the name of the column that need to be updated
      * @return Response Entity
      */
     @PutMapping("/addColumnValue")
-    public ResponseEntity addColumnValueToResource(@RequestParam String columnValue,
+    public ResponseEntity<?> addColumnValueToResource(@RequestParam String columnValue,
                                          @RequestParam Integer projectId,
                                          @RequestParam Integer resourceId,
-                                         @RequestParam String ColumnName){
+                                         @RequestParam String columnName){
         Project project = projectService.findById(projectId);
         Resource resource = resourceService.findOneById(resourceId);
         List<ProjectColumn> projectColumnList = projectColumnService.findByProject(project);
@@ -154,49 +175,51 @@ public class ResourceController {
         resourceDetail.setResource(resource);
         resourceDetail.setColumnValue(columnValue);
         for(ProjectColumn projectColumn:projectColumnList){
-            if (Objects.equals(projectColumn.getColumnName(), ColumnName)){
+            if (Objects.equals(projectColumn.getColumnName(), columnName)){
                 resourceDetail.setColumn(projectColumn);
                 resourceDetailService.addOne(resourceDetail);
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<>("Successfully added",HttpStatus.OK);
             }
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Can't find target",HttpStatus.NOT_FOUND);
     }
 
     /***
-     * update a column value for a column of all resources
+     * update a column value
      * @param columnValue The value of this column
      * @param columnName The name of this column
      * @param resourceId Resource ID which this column belongs to
      */
     @PutMapping("/updateColumnValue")
-    public ResponseEntity updateColumnValue(@RequestParam String columnValue,
+    public ResponseEntity<?> updateColumnValue(@RequestParam String columnValue,
                                   @RequestParam String columnName,
                                   @RequestParam Integer resourceId,
                                   @RequestParam Integer projectId){
         Resource resource = resourceService.findOneById(resourceId);
         Set<ResourceDetail> resourceDetailSet = resource.getResourceDetailSet();
+        Project project = projectService.findById(projectId);
         for (ResourceDetail resourceDetail:resourceDetailSet){
-            if(resourceDetail.getColumn().getColumnId()==projectId&&resourceDetail.getColumn().getColumnName()==columnName){
+            if(Objects.equals(project,resourceDetail.getColumn().getProject())&& Objects.equals(resourceDetail.getColumn().getColumnName(), columnName)){
                 resourceDetail.setColumnValue(columnValue);
                 resourceDetailService.addOne(resourceDetail);
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<>("Successfully updated",HttpStatus.OK);
             }
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Can't find Column Value",HttpStatus.NOT_FOUND);
     }
 
     /***
-     * re
-     * @param resource
-     * @param project
-     * @param columnName
-     * @return
+     * get a column value
+     * @param resourceId resource ID
+     * @param projectId project ID
+     * @param columnName the name of column
      */
     @RequestMapping("/columnValue")
-    public ResponseEntity<String> findColumnValue(@RequestBody Resource resource,
-                                                  @RequestBody Project project,
+    public ResponseEntity<?> findColumnValue(@RequestParam Integer resourceId,
+                                                  @RequestParam Integer projectId,
                                                   @RequestParam String columnName){
+        Project project = projectService.findById(projectId);
+        Resource resource = resourceService.findOneById(resourceId);
         List<ProjectColumn> projectColumnList = projectColumnService.findByProject(project);
         ProjectColumn projectColumn = null;
         for(ProjectColumn p:projectColumnList){
@@ -206,11 +229,11 @@ public class ResourceController {
         }
         List<ResourceDetail> resourceDetailList = resourceDetailService.findByResource(resource);
         for(ResourceDetail r:resourceDetailList){
-            if(r.getColumn()==projectColumn){
+            if(Objects.equals(projectColumn,r.getColumn())){
                 return new ResponseEntity<>(r.getColumnValue(),HttpStatus.OK);
             }
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("can't find column value",HttpStatus.NOT_FOUND);
     }
 
 }
